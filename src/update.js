@@ -1,6 +1,7 @@
-import { player } from './create';
+// import { player } from './create';
 
 export default function update(){
+  /*
     let cursors = this.input.keyboard.createCursorKeys();
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
@@ -21,4 +22,5 @@ export default function update(){
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
     }
+    */
 }

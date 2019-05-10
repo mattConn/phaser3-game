@@ -25,3 +25,4 @@ export { config };
 };
 
 let game = new Phaser.Game(config);
+export { game };
