@@ -1,4 +1,6 @@
 import { config } from './index';
+import { gameObj } from './gameObjects/gameObject';
+
 
 let platforms, player;
 export { player };
@@ -26,6 +28,9 @@ export default function create() {
   platforms.create(0, config.height, 'platform');
 
   // add image: x,y coords, label
-  this.add.image(0, 0, 'star').setOrigin(0);
+  let star = new gameObj(this, 100, 100, 'star');
+  star.create();
+  console.log(star.position.x,star.position.y,star.image);
+  // this.add.image(0, 0, 'star').setOrigin(0);
   this.add.image(400, 400, 'diamond').setOrigin(0);
 }
