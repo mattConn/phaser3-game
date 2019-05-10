@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
-import { preload } from './preload';
-import { create } from './create';
+import preload from './preload';
+import create from './create';
+import update from './update';
 
 export { config };
 
@@ -18,8 +19,8 @@ export { config };
   },
   scene: {
     preload: preload,
-    create: create
-    // update: update
+    create: create,
+    update: update
   }
 };
 

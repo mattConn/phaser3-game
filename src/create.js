@@ -1,13 +1,13 @@
 import { config } from './index';
 
 let platforms, player;
+export { player };
 
 // initial render
 // ==============
-export function create() {
+export default function create() {
   // scene setup
   // ===========
-
   // add static groups
   platforms = this.physics.add.staticGroup();
 
@@ -16,7 +16,7 @@ export function create() {
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
 
-  this.physics.add.collider(platforms,player);
+  this.physics.add.collider(platforms, player);
 
   // initial scene creation
   // ======================

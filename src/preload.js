@@ -16,7 +16,7 @@ const spritesheets = [
 ];
 
 // load all images
-export function preload() {
+export default function preload() {
 
   for (const img of images)
     this.load.image(img.label, img.filename);
