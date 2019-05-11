@@ -9,12 +9,16 @@ export { player };
 
 // scene setup 
 export default function create() {
+  // platforms setup
   let platforms = new StaticObj(this, 'platform');
-  platforms.create(0, 400);
+  platforms.width = 400;
+  platforms.height = 32;
+
+  platforms.create(platforms.width/2, config.height - platforms.height/2);
 
   // player setup
-  let player = new DynamicObj(this, 'dude', 100, 300, platforms);
-  // player = this.physics.add.sprite(100, 450, 'dude');
-  // player.setBounce(0.2);
-  // player.setCollideWorldBounds(true);
+  player = new DynamicObj(this, 'dude', 100, 300, platforms);
+  player.addAnimation(this,'walk', 0, 3, 10);
+  player.addAnimation(this,'idle', 0, 0);
+  player.addAnimation(this,'inTheAir', 1, 1);
 }
