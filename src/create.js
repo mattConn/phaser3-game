@@ -4,7 +4,7 @@ import DynamicObj from './gameObjects/DynamicObj';
 
 
 let player, platforms;
-export { player };
+export { player, platforms };
 
 
 // scene setup 

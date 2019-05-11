@@ -2,12 +2,6 @@ import { player } from './create';
 import { config } from './index';
 
 export default function getKeyboardInput(game){
-
-    if(player.sprite.x > config.width)
-      player.sprite.x = 0;
-    if(player.sprite.x < 0)
-      player.sprite.x = config.width;
-
     let cursors = game.input.keyboard.createCursorKeys();
 
     if (cursors.left.isDown || cursors.right.isDown)
