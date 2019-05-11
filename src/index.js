@@ -14,7 +14,7 @@ export { config };
     default: 'arcade',
     arcade: {
       gravity: { y: 450 },
-      debug: false 
+      debug: true 
     }
   },
   scene: {
@@ -25,4 +25,3 @@ export { config };
 };
 
 let game = new Phaser.Game(config);
-export { game };
