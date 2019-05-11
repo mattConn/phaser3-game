@@ -5,11 +5,14 @@ import update from './update';
 
 export { config };
 
+
 // game config
  const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
+  roomIndex: 0, // initial room to draw
+  cellDimension: 32, // width/height of single grid cell
   physics: {
     default: 'arcade',
     arcade: {
@@ -25,3 +28,4 @@ export { config };
 };
 
 let game = new Phaser.Game(config);
+export { game };

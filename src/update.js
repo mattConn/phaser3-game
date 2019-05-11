@@ -1,7 +1,7 @@
 import { player, platforms } from './create';
-import { config } from './index';
+import { config, game } from './index';
 import getKeyboardInput from './getKeyboardInput';
-import levels from './levels/index';
+import rooms from './rooms';
 
 export default function update(){
 
@@ -11,17 +11,22 @@ export default function update(){
   if(player.sprite.x > config.width) {
     player.sprite.x = 0;
 
+    config.roomIndex++;
+    platforms.group.clear(true, true);
+    drawRoom(rooms[config.roomIndex]);
   }
 
   if(player.sprite.x < 0) {
     player.sprite.x = config.width;
 
-    drawRoom(levels[0]);
+    config.roomIndex--;
+    platforms.group.clear(true, true);
+    drawRoom(rooms[config.roomIndex]);
   }
 }
 
 // draw room using layout array
-function drawRoom(layout){
+export function drawRoom(layout){
   for(const row in layout)
   {
     for(const col in layout[row])
