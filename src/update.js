@@ -8,16 +8,18 @@ export default function update(){
   // get user input
   getKeyboardInput(this);
 
+  // player OOB on right
   if(player.sprite.x > config.width) {
-    player.sprite.x = 0;
+    player.sprite.x = 0; // teleport player to left edge
 
-    config.roomIndex++;
-    platforms.group.clear(true, true);
-    drawRoom(rooms[config.roomIndex]);
+    config.roomIndex++; // inc. room index
+    platforms.group.clear(true, true); // clear all platforms from screen
+    drawRoom(rooms[config.roomIndex]); // draw room at next index
   }
 
+  // player OOB on left 
   if(player.sprite.x < 0) {
-    player.sprite.x = config.width;
+    player.sprite.x = config.width; // teleport player to right edge
 
     config.roomIndex--;
     platforms.group.clear(true, true);
