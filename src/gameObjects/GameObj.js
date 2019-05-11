@@ -5,6 +5,10 @@ export default class GameObj {
         this.group = game.add.group();
         // image to use
         this.image = image;
+
+        // dimensions
+        this.width = 0;
+        this.height = 0;
     }
 
     // instantiate in game world
