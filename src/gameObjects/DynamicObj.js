@@ -18,7 +18,7 @@ export default class DynamicObj extends GameObj {
     }
 
     // add sprite to scene at x y coords
-    addSprite(x, y) {
+    create(x, y) {
         this.sprite = this.group.create(x + this.width/2, y + this.height/2, this.image);
     }
 

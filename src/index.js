@@ -16,8 +16,8 @@ export { config };
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 450 },
-      debug: true 
+      gravity: { y: 600 },
+      debug: false 
     }
   },
   scene: {
