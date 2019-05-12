@@ -28,12 +28,12 @@ export default function create() {
   enemies.addCollision(this, player, platforms, enemies);
 
   // add overlap functions
-  player.addOverlap(this, test, enemies);
+  player.addOverlap(this, enemyCollisionTop, enemies);
 
   // draw first room
   drawRoom(rooms[config.roomIndex]);
 }
 
-function test(){
-  console.log('collision');
+function enemyCollisionTop(player, enemy){
+  player.body.x = enemy.body.x;
 }
