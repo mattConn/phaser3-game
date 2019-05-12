@@ -8,8 +8,6 @@ export default function update(){
   // get user input
   getKeyboardInput(this);
 
-  updateEnemies();
-
   // player OOB on right
   if(player.sprite.x > config.width) {
     player.sprite.x = 0; // teleport player to left edge
@@ -28,6 +26,7 @@ export default function update(){
     platforms.group.clear(true, true);
     enemies.group.clear(true, true);
     drawRoom(rooms[config.roomIndex]);
+    updateEnemies();
   }
 }
 
@@ -58,8 +57,11 @@ export function drawRoom(layout){
     } // end col loop
   } // end row loop
 
+  // update enemy animations
+  updateEnemies();
 }
 
+// update enemy animation and velocity
 function updateEnemies(){
   enemies.group.playAnimation('enemyWalk', true);
   enemies.group.setVelocityX(-10);

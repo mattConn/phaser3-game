@@ -27,6 +27,13 @@ export default function create() {
   // add collisions
   enemies.addCollision(this, player, platforms, enemies);
 
+  // add overlap functions
+  player.addOverlap(this, test, enemies);
+
   // draw first room
   drawRoom(rooms[config.roomIndex]);
+}
+
+function test(){
+  console.log('collision');
 }

@@ -30,6 +30,13 @@ export default class DynamicObj extends GameObj {
             game.physics.add.collider(this.group, obj.group);
     }
 
+    // add functions to call on overlap
+    addOverlap(game, fn, ...objs) {
+        for (const obj of [...objs])
+            game.physics.add.overlap(this.group, obj.group, fn, null, this);
+
+    }
+
 
 
     // add animation to sprite
