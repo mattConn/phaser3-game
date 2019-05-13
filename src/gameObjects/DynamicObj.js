@@ -18,7 +18,7 @@ export default class DynamicObj extends GameObj {
     }
 
     // add sprite to scene at x y coords
-    addSprite(x, y) {
+    create(x, y) {
         this.sprite = this.group.create(x + this.width/2, y + this.height/2, this.image);
     }
 
@@ -28,6 +28,13 @@ export default class DynamicObj extends GameObj {
 
         for (const obj of this.collidesWith)
             game.physics.add.collider(this.group, obj.group);
+    }
+
+    // add functions to call on overlap
+    addOverlap(game, fn, ...objs) {
+        for (const obj of [...objs])
+            game.physics.add.overlap(this.group, obj.group, fn, null, this);
+
     }
 
 
