@@ -74,3 +74,17 @@ function updateEnemies(){
   enemies.group.playAnimation('enemyWalk', true);
   enemies.group.setVelocityX(-10);
 }
+
+export function enemyCollision(_player, enemy) {
+  // touching top of enemy
+  if (_player.body.touching.down && enemy.body.touching.up)
+    enemy.destroy();
+  else {
+    player.group.clear(true, true);
+    config.playerSpawned = false;
+    platforms.group.clear(true, true);
+    enemies.group.clear(true, true);
+    drawRoom(rooms[config.roomIndex]);
+    updateEnemies();
+  }
+}
