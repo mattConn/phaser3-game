@@ -19,7 +19,6 @@ export default function create() {
 
   // player setup
   player = new DynamicObj(this, 'dude', 32, 48, platforms, enemies);
-  player.create(0, config.height - platforms.height - player.height);
   player.addAnimation(this,'walk', 0, 3, 10);
   player.addAnimation(this,'idle', 0, 0);
   player.addAnimation(this,'inTheAir', 1, 1);

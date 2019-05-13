@@ -13,6 +13,7 @@ export { config };
   height: 600,
   roomIndex: 0, // initial room to draw
   cellDimension: 32, // width/height of single grid cell
+  playerSpawned: false, // flag for player spawned already
   physics: {
     default: 'arcade',
     arcade: {

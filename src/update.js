@@ -40,6 +40,14 @@ export function drawRoom(layout){
       // future object to draw in found in row
       let roomObj = null;
       switch (layout[row][col]) {
+        case '@': // platform token
+          if(config.playerSpawned !== true)
+          {
+            roomObj = player;
+            config.playerSpawned = true;
+          }
+          break;
+
         case 'p': // platform token
           roomObj = platforms;
           break;
