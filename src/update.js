@@ -3,13 +3,13 @@ import { config, game } from './index';
 import getKeyboardInput from './getKeyboardInput';
 import rooms from './rooms';
 
-export default function update(){
+export default function update() {
 
   // get user input
   getKeyboardInput(this);
 
   // player OOB on right
-  if(player.sprite.x > config.width) {
+  if (player.sprite.x > config.width) {
     player.sprite.x = 0; // teleport player to left edge
 
     config.roomIndex++; // inc. room index
@@ -19,7 +19,7 @@ export default function update(){
   }
 
   // player OOB on left 
-  if(player.sprite.x < 0) {
+  if (player.sprite.x < 0) {
     player.sprite.x = config.width; // teleport player to right edge
 
     config.roomIndex--;
@@ -31,18 +31,15 @@ export default function update(){
 }
 
 // draw room using layout array
-export function drawRoom(layout){
-  for(const row in layout)
-  {
-    for(const col in layout[row])
-    {
+export function drawRoom(layout) {
+  for (const row in layout) {
+    for (const col in layout[row]) {
 
       // future object to draw in found in row
       let roomObj = null;
       switch (layout[row][col]) {
         case '@': // platform token
-          if(config.playerSpawned !== true)
-          {
+          if (config.playerSpawned !== true) {
             roomObj = player;
             config.playerSpawned = true;
           }
@@ -55,12 +52,12 @@ export function drawRoom(layout){
         case 'e': // enemies token
           roomObj = enemies;
           break;
-      
+
         default:
           break;
       }
-        if(roomObj != null)
-          roomObj.create(col * 32, row * 32);
+      if (roomObj != null)
+        roomObj.create(col * 32, row * 32);
 
     } // end col loop
   } // end row loop
@@ -70,40 +67,45 @@ export function drawRoom(layout){
 }
 
 // update enemy animation and velocity
-function updateEnemies(){
+function updateEnemies() {
   enemies.group.playAnimation('enemyWalk', true);
   enemies.group.setVelocityX(-100);
 }
 
 export function enemyCollision(_player, enemy) {
   // touching top of enemy
-  if (_player.body.touching.down && enemy.body.touching.up)
-  {
+  if (_player.body.touching.down && enemy.body.touching.up) {
     // flip enemy and let them clip through everything
     enemy.setVelocityX(0);
     enemy.setVelocityY(-100);
     enemy.body.immovable = true;
-    console.log(enemy.body);
     enemy.flipY = true;
 
     // player bounces
     _player.setVelocityY(-230);
 
     // destroy enemy in 1s
-    setTimeout(function(){
+    setTimeout(function () {
       enemy.destroy();
     }, 1000);
   }
   // player dies
   else {
-    // clear all groups from screen
-    player.group.clear(true, true);
-    config.playerSpawned = false;
-    platforms.group.clear(true, true);
-    enemies.group.clear(true, true);
+    // flip player upside down, move up
+    _player.setVelocityY(-200);
+    _player.body.immovable = true;
+    _player.flipY = true;
 
-    // reset screen
-    drawRoom(rooms[config.roomIndex]);
-    updateEnemies();
+    setTimeout(function () {
+      // clear all groups from screen
+      player.group.clear(true, true);
+      config.playerSpawned = false;
+      platforms.group.clear(true, true);
+      enemies.group.clear(true, true);
+
+      // reset screen
+      drawRoom(rooms[config.roomIndex]);
+      updateEnemies();
+    }, 200);
   }
 }
