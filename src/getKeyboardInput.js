@@ -19,7 +19,7 @@ export default function getKeyboardInput(game){
     }
   
     if (cursors.up.isDown && player.sprite.body.touching.down) {
-      player.sprite.setVelocityY(-300);
+      player.sprite.setVelocityY(-250);
     }
 
     if (!player.sprite.body.touching.down) 

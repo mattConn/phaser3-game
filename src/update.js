@@ -72,18 +72,37 @@ export function drawRoom(layout){
 // update enemy animation and velocity
 function updateEnemies(){
   enemies.group.playAnimation('enemyWalk', true);
-  enemies.group.setVelocityX(-10);
+  enemies.group.setVelocityX(-100);
 }
 
 export function enemyCollision(_player, enemy) {
   // touching top of enemy
   if (_player.body.touching.down && enemy.body.touching.up)
-    enemy.destroy();
+  {
+    // flip enemy and let them clip through everything
+    enemy.setVelocityX(0);
+    enemy.setVelocityY(-100);
+    enemy.body.immovable = true;
+    console.log(enemy.body);
+    enemy.flipY = true;
+
+    // player bounces
+    _player.setVelocityY(-230);
+
+    // destroy enemy in 1s
+    setTimeout(function(){
+      enemy.destroy();
+    }, 1000);
+  }
+  // player dies
   else {
+    // clear all groups from screen
     player.group.clear(true, true);
     config.playerSpawned = false;
     platforms.group.clear(true, true);
     enemies.group.clear(true, true);
+
+    // reset screen
     drawRoom(rooms[config.roomIndex]);
     updateEnemies();
   }
