@@ -107,10 +107,10 @@ export function enemyCollision(_player, enemy) {
       config.playerSpawned = false;
       platforms.group.clear(true, true);
       enemies.group.clear(true, true);
+      blocks.group.clear(true, true);
 
       // reset screen
       drawRoom(rooms[config.roomIndex]);
-      updateEnemies();
     }, 200);
   }
 }
