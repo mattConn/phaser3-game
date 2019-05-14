@@ -97,7 +97,7 @@ export function enemyCollision(player, enemy) {
     enemy.body.immovable = true;
     enemy.flipY = true;
 
-    // allObjects.player bounces
+    // player bounces off enemy
     player.setVelocityY(-230);
 
     // destroy enemy in 1s
@@ -105,24 +105,24 @@ export function enemyCollision(player, enemy) {
       enemy.destroy();
     }, 1000);
   }
-  // allObjects.player dies
+
+  // player dies
   else {
-    // flip allObjects.player upside down, move up
+    // flip player upside down, move up
     player.setVelocityY(-200);
     player.body.immovable = true;
     player.flipY = true;
 
     setTimeout(function () {
-      // clear all groups from screen
+      // reset room
       allObjects.player.group.clear(true, true);
       config.playerSpawned = false;
-      allObjects.platforms.group.clear(true, true);
-      allObjects.enemies.group.clear(true, true);
-      allObjects.blocks.group.clear(true, true);
-      allObjects.spikes.group.clear(true, true);
 
-      // reset screen
+      roomClear();
+
+      // redraw
       roomDraw(rooms[config.roomIndex]);
+
     }, 200);
   }
 }
