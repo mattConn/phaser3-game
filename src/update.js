@@ -10,25 +10,21 @@ export default function update() {
 
   // allObjects.player OOB on right
   if (allObjects.player.sprite.x > config.width) {
-    allObjects.player.sprite.x = 0; // teleport allObjects.player to left edge
+    allObjects.player.sprite.x = 0; // teleport player to left edge
 
     config.roomIndex++; // inc. room index
-    allObjects.platforms.group.clear(true, true); // clear all allObjects.platforms from screen
-    allObjects.enemies.group.clear(true, true);
-    allObjects.blocks.group.clear(true, true);
-    allObjects.spikes.group.clear(true, true);
+
+    roomClear();
     roomDraw(rooms[config.roomIndex]); // draw room at next index
   }
 
   // allObjects.player OOB on left 
   if (allObjects.player.sprite.x < 0) {
-    allObjects.player.sprite.x = config.width; // teleport allObjects.player to right edge
+    allObjects.player.sprite.x = config.width; // teleport player to right edge
 
     config.roomIndex--;
-    allObjects.platforms.group.clear(true, true);
-    allObjects.enemies.group.clear(true, true);
-    allObjects.blocks.group.clear(true, true);
-    allObjects.spikes.group.clear(true, true);
+
+    roomClear();
     roomDraw(rooms[config.roomIndex]); // draw room at next index
   }
 }
@@ -75,6 +71,15 @@ export function roomDraw(layout) {
 
   // update enemy animations
   updateEnemies();
+}
+
+// clear room of all objects except for player
+function roomClear(){
+  for(const obj in allObjects)
+  {
+    if(obj !== 'player')
+      allObjects[obj].group.clear(true, true);
+  }
 }
 
 // update enemy animation and velocity
