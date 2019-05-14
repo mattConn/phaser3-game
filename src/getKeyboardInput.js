@@ -1,31 +1,31 @@
-import { player } from './create';
+import { allObjects } from './create';
 
-// keyboard control: change player's velcocity, animations
+// keyboard control: change allObjects.player's velcocity, animations
 export default function getKeyboardInput(game){
     let cursors = game.input.keyboard.createCursorKeys();
 
     // left or right key: play walk animation
     if (cursors.left.isDown || cursors.right.isDown)
-      player.playAnimation('walk');
+      allObjects.player.playAnimation('walk');
 
     // set positive or negative velocity on player, flip horizontally
     if (cursors.left.isDown) { // move left
-      player.sprite.setVelocityX(-280);
-      player.sprite.flipX = false;
+      allObjects.player.sprite.setVelocityX(-280);
+      allObjects.player.sprite.flipX = false;
     } else if (cursors.right.isDown) { // move right
-      player.sprite.setVelocityX(280);
-      player.sprite.flipX = true;
+      allObjects.player.sprite.setVelocityX(280);
+      allObjects.player.sprite.flipX = true;
     } else { // idle
-      player.sprite.setVelocityX(0);
-      player.playAnimation('idle');
+      allObjects.player.sprite.setVelocityX(0);
+      allObjects.player.playAnimation('idle');
     }
   
     // jump
-    if (cursors.up.isDown && player.sprite.body.touching.down) {
-      player.sprite.setVelocityY(-250);
+    if (cursors.up.isDown && allObjects.player.sprite.body.touching.down) {
+      allObjects.player.sprite.setVelocityY(-250);
     }
 
     // play animation when jumping or falling
-    if (!player.sprite.body.touching.down) 
-      player.playAnimation('inTheAir');
+    if (!allObjects.player.sprite.body.touching.down) 
+      allObjects.player.playAnimation('inTheAir');
 }
