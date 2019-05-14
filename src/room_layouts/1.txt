@@ -13,7 +13,7 @@ bbbbbbbbbbbbbbbbbbbbbb---
 b------------------------
 b------------e----e----bb
 b---------------------bbb
-b--------------------b-bb 
-b-@-----------------bbbbb
-b------------------bbbbbb
-bbbbbbbbbbbbbbbbbbbbbbbbb
+b-@------------------b-bb 
+b-------------------bbbbb
+bbbbbb---bbbbbbbbbbbbbbbb
+bbbbbb^^^bbbbbbbbbbbbbbbb

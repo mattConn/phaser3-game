@@ -1,4 +1,4 @@
-import { player, platforms, blocks, enemies } from './create';
+import { player, platforms, blocks, enemies, spikes } from './create';
 import { config, game } from './index';
 import getKeyboardInput from './getKeyboardInput';
 import rooms from './rooms';
@@ -16,6 +16,7 @@ export default function update() {
     platforms.group.clear(true, true); // clear all platforms from screen
     enemies.group.clear(true, true);
     blocks.group.clear(true, true);
+    spikes.group.clear(true, true);
     drawRoom(rooms[config.roomIndex]); // draw room at next index
   }
 
@@ -26,6 +27,8 @@ export default function update() {
     config.roomIndex--;
     platforms.group.clear(true, true);
     enemies.group.clear(true, true);
+    blocks.group.clear(true, true);
+    spikes.group.clear(true, true);
     drawRoom(rooms[config.roomIndex]);
     updateEnemies();
   }
@@ -52,6 +55,10 @@ export function drawRoom(layout) {
 
         case 'p': // platform token
           roomObj = platforms;
+          break;
+
+        case '^': // spike token
+          roomObj = spikes;
           break;
 
         case 'e': // enemies token
@@ -108,6 +115,7 @@ export function enemyCollision(_player, enemy) {
       platforms.group.clear(true, true);
       enemies.group.clear(true, true);
       blocks.group.clear(true, true);
+      spikes.group.clear(true, true);
 
       // reset screen
       drawRoom(rooms[config.roomIndex]);

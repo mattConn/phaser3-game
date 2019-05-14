@@ -3,6 +3,7 @@ import star from './assets/star.png';
 import diamond from './assets/diamond.png';
 import platform from './assets/platform.png';
 import block from './assets/block.png';
+import spikes from './assets/spikes.png';
 import dude from './assets/dude.png';
 import baddie from './assets/baddie.png';
 
@@ -11,6 +12,7 @@ const images = [
   { label: 'star', filename: star },
   { label: 'diamond', filename: diamond },
   { label: 'platform', filename: platform },
+  { label: 'spikes', filename: spikes },
   { label: 'block', filename: block }
 ];
 
