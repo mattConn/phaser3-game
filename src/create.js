@@ -4,13 +4,16 @@ import DynamicObj from './gameObjects/DynamicObj';
 import rooms from './rooms';
 import { drawRoom, enemyCollision } from './update';
 
-let player, platforms, enemies;
-export { player, platforms, enemies };
+let player, platforms, blocks, enemies;
+export { player, platforms, blocks, enemies };
 
 // scene setup 
 export default function create() {
   // platforms setup
-  platforms = new StaticObj(this, 'platform', 400, 32);
+  platforms = new StaticObj(this, 'platform', 320, 32);
+
+  // blocks setup
+  blocks = new StaticObj(this, 'block', 32, 32);
 
   // enemies setup
   enemies = new DynamicObj(this, 'baddie', 32, 32);
@@ -18,13 +21,13 @@ export default function create() {
 
   // DO NOT add colliders between separate sprites
   // player setup
-  player = new DynamicObj(this, 'dude', 32, 48, platforms);
+  player = new DynamicObj(this, 'dude', 32, 48, platforms, blocks);
   player.addAnimation(this, 'walk', 0, 3, 10);
   player.addAnimation(this, 'idle', 0, 0);
   player.addAnimation(this, 'inTheAir', 1, 1);
 
   // add collisions
-  enemies.addCollision(this, platforms, enemies);
+  enemies.addCollision(this, platforms, blocks, enemies);
 
   // add overlap functions
   player.addOverlap(this, enemyCollision, enemies);

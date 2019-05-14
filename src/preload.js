@@ -2,6 +2,7 @@ import square from './assets/square.png';
 import star from './assets/star.png';
 import diamond from './assets/diamond.png';
 import platform from './assets/platform.png';
+import block from './assets/block.png';
 import dude from './assets/dude.png';
 import baddie from './assets/baddie.png';
 
@@ -9,7 +10,8 @@ import baddie from './assets/baddie.png';
 const images = [
   { label: 'star', filename: star },
   { label: 'diamond', filename: diamond },
-  { label: 'platform', filename: platform }
+  { label: 'platform', filename: platform },
+  { label: 'block', filename: block }
 ];
 
 const spritesheets = [
