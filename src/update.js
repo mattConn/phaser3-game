@@ -1,4 +1,4 @@
-import { allObjects, enemies } from './create';
+import { allObjects } from './create';
 import { config, game } from './index';
 import getKeyboardInput from './getKeyboardInput';
 import rooms from './rooms';
@@ -14,7 +14,7 @@ export default function update() {
 
     config.roomIndex++; // inc. room index
     allObjects.platforms.group.clear(true, true); // clear all allObjects.platforms from screen
-    enemies.group.clear(true, true);
+    allObjects.enemies.group.clear(true, true);
     allObjects.blocks.group.clear(true, true);
     allObjects.spikes.group.clear(true, true);
     roomDraw(rooms[config.roomIndex]); // draw room at next index
@@ -26,7 +26,7 @@ export default function update() {
 
     config.roomIndex--;
     allObjects.platforms.group.clear(true, true);
-    enemies.group.clear(true, true);
+    allObjects.enemies.group.clear(true, true);
     allObjects.blocks.group.clear(true, true);
     allObjects.spikes.group.clear(true, true);
     roomDraw(rooms[config.roomIndex]); // draw room at next index
@@ -61,7 +61,7 @@ export function roomDraw(layout) {
           break;
 
         case 'e': // enemies token
-          roomObj = enemies;
+          roomObj = allObjects.enemies;
           break;
 
         default:
@@ -79,8 +79,8 @@ export function roomDraw(layout) {
 
 // update enemy animation and velocity
 function updateEnemies() {
-  enemies.group.playAnimation('enemyWalk', true);
-  enemies.group.setVelocityX(-100);
+  allObjects.enemies.group.playAnimation('enemyWalk', true);
+  allObjects.enemies.group.setVelocityX(-100);
 }
 
 export function enemyCollision(player, enemy) {
@@ -112,7 +112,7 @@ export function enemyCollision(player, enemy) {
       allObjects.player.group.clear(true, true);
       config.playerSpawned = false;
       allObjects.platforms.group.clear(true, true);
-      enemies.group.clear(true, true);
+      allObjects.enemies.group.clear(true, true);
       allObjects.blocks.group.clear(true, true);
       allObjects.spikes.group.clear(true, true);
 
