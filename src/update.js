@@ -1,4 +1,4 @@
-import { player, platforms, enemies } from './create';
+import { player, platforms, blocks, enemies } from './create';
 import { config, game } from './index';
 import getKeyboardInput from './getKeyboardInput';
 import rooms from './rooms';
@@ -15,6 +15,7 @@ export default function update() {
     config.roomIndex++; // inc. room index
     platforms.group.clear(true, true); // clear all platforms from screen
     enemies.group.clear(true, true);
+    blocks.group.clear(true, true);
     drawRoom(rooms[config.roomIndex]); // draw room at next index
   }
 
@@ -43,6 +44,10 @@ export function drawRoom(layout) {
             roomObj = player;
             config.playerSpawned = true;
           }
+          break;
+
+        case 'b': // block token
+          roomObj = blocks;
           break;
 
         case 'p': // platform token
