@@ -2,7 +2,7 @@ import { config } from './index';
 import StaticObj from './gameObjects/StaticObj';
 import DynamicObj from './gameObjects/DynamicObj';
 import rooms from './rooms';
-import { roomDraw, enemyCollision } from './update';
+import { roomDraw, collisionEnemy } from './update';
 
 const allObjects = {
   player: null,
@@ -40,7 +40,7 @@ export default function create() {
   allObjects.enemies.addCollision(this, allObjects.platforms, allObjects.blocks, allObjects.enemies, allObjects.spikes);
 
   // add overlap functions
-  allObjects.player.addOverlap(this, enemyCollision, allObjects.enemies);
+  allObjects.player.addOverlap(this, collisionEnemy, allObjects.enemies);
 
   // draw first room
   roomDraw(rooms[config.roomIndex]);

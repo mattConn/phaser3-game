@@ -88,41 +88,49 @@ function updateEnemies() {
   allObjects.enemies.group.setVelocityX(-100);
 }
 
-export function enemyCollision(player, enemy) {
+// called when player touches enemy
+export function collisionEnemy(player, enemy) {
   // touching top of enemy
   if (player.body.touching.down && enemy.body.touching.up) {
-    // flip enemy and let them clip through everything
-    enemy.setVelocityX(0);
-    enemy.setVelocityY(-100);
-    enemy.body.immovable = true;
-    enemy.flipY = true;
-
     // player bounces off enemy
     player.setVelocityY(-230);
-
-    // destroy enemy in 1s
-    setTimeout(function () {
-      enemy.destroy();
-    }, 1000);
+    deathEnemy(enemy);
   }
-
   // player dies
-  else {
-    // flip player upside down, move up
-    player.setVelocityY(-200);
-    player.body.immovable = true;
-    player.flipY = true;
+  else
+    deathPlayer();
+}
 
-    setTimeout(function () {
-      // reset room
-      allObjects.player.group.clear(true, true);
-      config.playerSpawned = false;
+// called when player dies
+export function deathPlayer(){
+ // flip player upside down, move up
+ allObjects.player.sprite.setVelocityY(-200);
+ allObjects.player.sprite.body.immovable = true;
+ allObjects.player.sprite.flipY = true;
 
-      roomClear();
+ setTimeout(function () {
+   // reset room
+   allObjects.player.group.clear(true, true);
+   config.playerSpawned = false;
 
-      // redraw
-      roomDraw(rooms[config.roomIndex]);
+   roomClear();
 
-    }, 200);
-  }
+   // redraw
+   roomDraw(rooms[config.roomIndex]);
+
+ }, 200);
+}
+
+// called when enemy dies
+export function deathEnemy(enemy){
+ // flip enemy and let them clip through everything
+ enemy.setVelocityX(0);
+ enemy.setVelocityY(-100);
+ enemy.body.immovable = true;
+ enemy.flipY = true;
+
+  // destroy enemy in 1s
+  setTimeout(function () {
+    enemy.destroy();
+  }, 1000);
 }
