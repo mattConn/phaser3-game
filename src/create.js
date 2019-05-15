@@ -2,7 +2,8 @@ import { config } from './index';
 import StaticObj from './gameObjects/StaticObj';
 import DynamicObj from './gameObjects/DynamicObj';
 import rooms from './rooms';
-import { roomDraw, collisionEnemy } from './update';
+import { roomDraw, collisionEnemy, deathPlayer, patrolEnemy } from './update';
+
 
 const allObjects = {
   player: null,
@@ -31,16 +32,19 @@ export default function create() {
 
   // DO NOT add colliders between separate sprites
   // player setup
-  allObjects.player = new DynamicObj(this, 'dude', 32, 48, allObjects.platforms, allObjects.blocks, allObjects.spikes);
+  allObjects.player = new DynamicObj(this, 'dude', 32, 48, allObjects.platforms, allObjects.blocks);
   allObjects.player.addAnimation(this, 'walk', 0, 3, 10);
   allObjects.player.addAnimation(this, 'idle', 0, 0);
   allObjects.player.addAnimation(this, 'inTheAir', 1, 1);
 
-  // add collisions
-  allObjects.enemies.addCollision(this, allObjects.platforms, allObjects.blocks, allObjects.enemies, allObjects.spikes);
+  // add enemy collisions
+  allObjects.enemies.addCollision(this, allObjects.platforms, allObjects.spikes);
+  allObjects.enemies.addCollisionCallback(this, allObjects.blocks, patrolEnemy);
 
-  // add overlap functions
-  allObjects.player.addOverlap(this, collisionEnemy, allObjects.enemies);
+  // add player collisions functions
+  allObjects.player.addCollision(this, allObjects.platforms, allObjects.blocks);
+  allObjects.player.addCollisionCallback(this, allObjects.enemies, collisionEnemy);
+  allObjects.player.addCollisionCallback(this, allObjects.spikes, deathPlayer);
 
   // draw first room
   roomDraw(rooms[config.roomIndex]);

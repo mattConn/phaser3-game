@@ -70,7 +70,7 @@ export function roomDraw(layout) {
   } // end row loop
 
   // update enemy animations
-  updateEnemies();
+  spawnEnemies();
 }
 
 // clear room of all objects except for player
@@ -83,13 +83,14 @@ function roomClear(){
 }
 
 // update enemy animation and velocity
-function updateEnemies() {
+function spawnEnemies() {
   allObjects.enemies.group.playAnimation('enemyWalk', true);
   allObjects.enemies.group.setVelocityX(-100);
 }
 
 // called when player touches enemy
 export function collisionEnemy(player, enemy) {
+
   // touching top of enemy
   if (player.body.touching.down && enemy.body.touching.up) {
     // player bounces off enemy
@@ -99,6 +100,29 @@ export function collisionEnemy(player, enemy) {
   // player dies
   else
     deathPlayer();
+}
+
+export function prePatrolEnemy(enemy, staticObj) {
+  if(enemy.body.touching.left || enemy.body.touching.right)
+  {
+    console.log('pre collision');
+    enemy.body.velocity.x *= -1;
+  }
+}
+
+// reverse patrolling object on collision
+export function patrolEnemy(enemy, staticObj) {
+  if(enemy.body.touching.left)
+    enemy.flipX = true; 
+  else if(enemy.body.touching.right)
+    enemy.flipX = false; 
+  else
+    return; // not touching left or right, exit function
+
+  if(enemy.body.touching.left)
+    enemy.setVelocityX(100);
+  else if(enemy.body.touching.right)
+    enemy.setVelocityX(-100);
 }
 
 // called when player dies

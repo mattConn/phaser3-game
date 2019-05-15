@@ -5,13 +5,15 @@ import update from './update';
 
 export { config };
 
+// sandbox room index
+const SANDBOX = 0;
 
 // game config
  const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
-  roomIndex: 0, // initial room to draw
+  roomIndex: 1, // initial room to draw
   cellDimension: 32, // width/height of single grid cell
   playerSpawned: false, // flag for allObjects.player spawned already
   physics: {

@@ -1,20 +1,14 @@
 import GameObj from './GameObj';
 
 export default class DynamicObj extends GameObj {
-    constructor(game, image, width, height, ...collidesWith) {
+    constructor(game, image, width, height) {
         super(game, image, width, height);
-
-        // list of objects to collide with
-        this.collidesWith = [];
 
         // list of sprite animations
         this.animations = [];
 
-        // sprites
+        // sprite
         this.sprite = null;
-
-        // set collisions
-        this.addCollision(game, ...collidesWith);
     }
 
     // add sprite to scene at x y coords
@@ -22,22 +16,27 @@ export default class DynamicObj extends GameObj {
         this.sprite = this.group.create(x + this.width/2, y + this.height/2, this.image);
     }
 
-    // set list of objects to collide with
+    // set list of objects to collide with, with optional callback
     addCollision(game, ...objs) {
-        this.collidesWith.push(...objs);
-
-        for (const obj of this.collidesWith)
+        for(const obj of [...objs])
             game.physics.add.collider(this.group, obj.group);
     }
 
-    // add functions to call on overlap
-    addOverlap(game, fn, ...objs) {
-        for (const obj of [...objs])
-            game.physics.add.overlap(this.group, obj.group, fn, null, this);
-
+    // with onCollision
+    addCollisionCallback(game, obj, onCollision = null, preCollision = null) {
+        game.physics.add.collider(this.group, obj.group, onCollision, preCollision);
     }
 
+    // set list of objects to collide with, with optional callback
+    addOverlap(game, ...objs) {
+        for(const obj of [...objs])
+            game.physics.add.overlap(this.group, obj.group);
+    }
 
+    // with callback
+    addOverlapCallback(game, obj, callback = null) {
+        game.physics.add.overlap(this.group, obj.group, callback);
+    }
 
     // add animation to sprite
     addAnimation(game, key, start, end, frameRate = 0, repeat = -1) {
