@@ -10,22 +10,23 @@ export default function getKeyboardInput(game){
 
     // set positive or negative velocity on player, flip horizontally
     if (cursors.left.isDown) { // move left
-      allObjects.player.sprite.setVelocityX(-280);
-      allObjects.player.sprite.flipX = false;
+      allObjects.player.group.setVelocityX(-280);
+      allObjects.player.group.flipX = false;
     } else if (cursors.right.isDown) { // move right
-      allObjects.player.sprite.setVelocityX(280);
-      allObjects.player.sprite.flipX = true;
+      allObjects.player.group.setVelocityX(280);
+      allObjects.player.group.flipX = true;
     } else { // idle
-      allObjects.player.sprite.setVelocityX(0);
+      allObjects.player.group.setVelocityX(0);
       allObjects.player.playAnimation('idle');
     }
-  
+
     // jump
-    if (cursors.up.isDown && allObjects.player.sprite.body.touching.down) {
-      allObjects.player.sprite.setVelocityY(-250);
+    if (cursors.up.isDown) {
+      if(allObjects.player.body.touching.down)
+        allObjects.player.group.setVelocityY(-250);
     }
 
     // play animation when jumping or falling
-    if (!allObjects.player.sprite.body.touching.down) 
+    if (!allObjects.player.body.touching.down) 
       allObjects.player.playAnimation('inTheAir');
 }

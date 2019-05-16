@@ -14,6 +14,9 @@ export default class DynamicObj extends GameObj {
     // add sprite to scene at x y coords
     create(x, y) {
         this.sprite = this.group.create(x + this.width/2, y + this.height/2, this.image);
+
+        // set body to last/most recent group entry
+        this.body = this.group.getChildren()[this.group.getChildren().length - 1].body;
     }
 
     // set list of objects to collide with, with optional callback
