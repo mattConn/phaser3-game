@@ -102,14 +102,6 @@ export function collisionEnemy(player, enemy) {
     deathPlayer();
 }
 
-export function prePatrolEnemy(enemy, staticObj) {
-  if(enemy.body.touching.left || enemy.body.touching.right)
-  {
-    console.log('pre collision');
-    enemy.body.velocity.x *= -1;
-  }
-}
-
 // reverse patrolling object on collision
 export function patrolEnemy(enemy, staticObj) {
   if(enemy.body.touching.left)
