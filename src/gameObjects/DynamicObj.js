@@ -53,6 +53,6 @@ export default class DynamicObj extends GameObj {
     // play sprite animation
     playAnimation(animationName) {
         if (this.animations.find(animation => animation.key === animationName))
-            this.sprite.anims.play(animationName, true);
+            this.group.playAnimation(animationName, true);
     }
 }
