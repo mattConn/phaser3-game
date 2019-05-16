@@ -9,6 +9,9 @@ export default class DynamicObj extends GameObj {
 
         // sprite
         this.sprite = null;
+
+        // last entry in children.entries
+        this.lastEntry = null;
     }
 
     // add sprite to scene at x y coords
@@ -16,7 +19,7 @@ export default class DynamicObj extends GameObj {
         this.sprite = this.group.create(x + this.width/2, y + this.height/2, this.image);
 
         // set body to last/most recent group entry
-        this.body = this.group.getChildren()[this.group.getChildren().length - 1].body;
+        this.lastEntry = this.group.getChildren()[this.group.getChildren().length - 1];
     }
 
     // set list of objects to collide with, with optional callback

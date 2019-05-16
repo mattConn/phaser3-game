@@ -11,10 +11,10 @@ export default function getKeyboardInput(game){
     // set positive or negative velocity on player, flip horizontally
     if (cursors.left.isDown) { // move left
       allObjects.player.group.setVelocityX(-280);
-      allObjects.player.group.flipX = false;
+      allObjects.player.lastEntry.flipX = false;
     } else if (cursors.right.isDown) { // move right
       allObjects.player.group.setVelocityX(280);
-      allObjects.player.group.flipX = true;
+      allObjects.player.lastEntry.flipX = true;
     } else { // idle
       allObjects.player.group.setVelocityX(0);
       allObjects.player.playAnimation('idle');
@@ -22,11 +22,11 @@ export default function getKeyboardInput(game){
 
     // jump
     if (cursors.up.isDown) {
-      if(allObjects.player.body.touching.down)
+      if(allObjects.player.lastEntry.body.touching.down)
         allObjects.player.group.setVelocityY(-250);
     }
 
     // play animation when jumping or falling
-    if (!allObjects.player.body.touching.down) 
+    if (!allObjects.player.lastEntry.body.touching.down) 
       allObjects.player.playAnimation('inTheAir');
 }
