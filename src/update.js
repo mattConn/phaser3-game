@@ -9,8 +9,8 @@ export default function update() {
   getKeyboardInput(this);
 
   // allObjects.player OOB on right
-  if (allObjects.player.sprite.x > config.width) {
-    allObjects.player.sprite.x = 0; // teleport player to left edge
+  if (allObjects.player.lastEntry.x > config.width) {
+    allObjects.player.lastEntry.x = 0; // teleport player to left edge
 
     config.roomIndex++; // inc. room index
 
@@ -19,8 +19,8 @@ export default function update() {
   }
 
   // allObjects.player OOB on left 
-  if (allObjects.player.sprite.x < 0) {
-    allObjects.player.sprite.x = config.width; // teleport player to right edge
+  if (allObjects.player.lastEntry.x < 0) {
+    allObjects.player.lastEntry.x = config.width; // teleport player to right edge
 
     config.roomIndex--;
 
@@ -120,9 +120,9 @@ export function patrolEnemy(enemy, staticObj) {
 // called when player dies
 export function deathPlayer(){
  // flip player upside down, move up
- allObjects.player.sprite.setVelocityY(-200);
- allObjects.player.sprite.body.immovable = true;
- allObjects.player.sprite.flipY = true;
+ allObjects.player.lastEntry.setVelocityY(-200);
+ allObjects.player.lastEntry.body.immovable = true;
+ allObjects.player.lastEntry.flipY = true;
 
  setTimeout(function () {
    // reset room

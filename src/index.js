@@ -13,7 +13,7 @@ const SANDBOX = 0;
   type: Phaser.AUTO,
   width: 800,
   height: 600,
-  roomIndex: 1, // initial room to draw
+  roomIndex: 0, // initial room to draw
   cellDimension: 32, // width/height of single grid cell
   playerSpawned: false, // flag for allObjects.player spawned already
   physics: {

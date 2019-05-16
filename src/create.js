@@ -37,6 +37,8 @@ export default function create() {
   allObjects.player.addAnimation(this, 'idle', 0, 0);
   allObjects.player.addAnimation(this, 'inTheAir', 1, 1);
 
+  // player body is first entry in children entries
+
   // add enemy collisions
   allObjects.enemies.addCollision(this, allObjects.platforms, allObjects.spikes);
   allObjects.enemies.addCollisionCallback(this, allObjects.blocks, patrolEnemy);
