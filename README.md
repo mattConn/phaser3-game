@@ -1,55 +1,23 @@
-# Phaser 3 Webpack Project Template
+# Phaser3-Game
+Making a game with Phaser 3!
 
-A Phaser 3 project template with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/)
-that includes hot-reloading for development and production-ready builds.
+## Building
+`npm start` will compile your game with webpack and serve it locally.
 
-Loading images via JavaScript module `import` is also supported.
+## Development
+Here's a breakdown of this project's files in `src` and what they're for. This project is just my approach to prototyping a game, and definitely not THE way to make a game.
 
-## Requirements
+Phaser has a pretty good tutorial <a href="http://phaser.io/tutorials/making-your-first-phaser-3-game/part1">here</a>, which I used to get off the ground. 
 
-[Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
+### Entry Point: index.js
+The program entry point. Here a new `Phaser` object is instantiated and exported. A config constant is defined as well. I added in `roomIndex`,`cellDimension`,and `playerSpawned` to `config` for my own convenience. The rest is fairly standard boilerplate for a Phaser game, and changing these values will visibly change any Phaser game. You'll notice `preload`, `create` and `update` are specified here as well. 
 
-## Available Commands
+## Preload, Create, Update: Standard Game Functions
 
-| Command | Description |
-|---------|-------------|
-| `npm install` | Install project dependencies |
-| `npm start` | Build project and open web server running project |
-| `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
+### preload.js
+Assets are imported and loaded by Phaser here. The assets I loaded were images and spritesheets in `src/assets`.
 
-## Writing Code
+### create.js
+Game objects are configured here, and essentially prepared for when the game is actually interactive/being played. I made the decision to store all game objects in an object `allObjects`; its easier to import/export every game object I need and easier to affect the entire game when all game objects are in one place. They'll be dealt with a lot.
 
-After cloning the repo, run `npm install` from your project directory. Then, you can start the local development
-server by running `npm start`.
-
-
-After starting the development server with `npm start`, you can edit any files in the `src` folder
-and webpack will automatically recompile and reload your server (available at `http://localhost:8080`
-by default).
-
-## Customizing Template
-
-### Babel
-You can write modern ES6+ JavaScript and Babel will transpile it to a version of JavaScript that you
-want your project to support. The targeted browsers are set in the `.babelrc` file and the default currently
-targets all browsers with total usage over "0.25%" but excludes IE11 and Opera Mini.
-
-  ```
-  "browsers": [
-    ">0.25%",
-    "not ie 11",
-    "not op_mini all"
-  ]
-  ```
-
-### Webpack
-If you want to customize your build, such as adding a new webpack loader or plugin (i.e. for loading CSS or fonts), you can
-modify the `webpack/base.js` file for cross-project changes, or you can modify and/or create
-new configuration files and target them in specific npm tasks inside of `package.json'.
-
-## Deploying Code
-After you run the `npm run build` command, your code will be built into a single bundle located at 
-`dist/bundle.min.js` along with any other assets you project depended. 
-
-If you put the contents of the `dist` folder in a publicly-accessible location (say something like `http://mycoolserver.com`), 
-you should be able to open `http://mycoolserver.com/index.html` and play your game.
+I call a lot of methods in this file which I'll explain later on.
